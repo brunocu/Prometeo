@@ -39,7 +39,7 @@ PS3="> "
 while : ; do
     draw_banner
 
-    options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Buscar procesos" "Monitoreo" "Salir")
+    options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Buscar procesos" "Monitoreo" "Benchmark" "Salir")
     select opt in "${options[@]}"
     do
         case $REPLY in
@@ -59,6 +59,9 @@ while : ; do
                 break
                 ;;
             6)
+                break
+                ;;
+            7)
                 break 2
                 ;;
             *) echo "Opcion inválida" ;;

@@ -54,13 +54,42 @@ do
     # PS3="> "
 done
 
-if (( "${#old}" > 10)); then
+n_files=$(echo "${old[@]}" | wc -l)
+
+if (( "$n_files" > 10)); then
     tput smso
-    read -p "Se encontraron más de 10 resultados, desea imprimirlos? [y/[n]]" yn
-    tput sgr0
+    read -p "Se encontraron más de 10 resultados, desea imprimirlos? [y/[n]]: " yn
+
     if [[ "$yn" =~ ^[Yy]$ ]]; then
+        printf "\n- Archivos antiguos:"
         echo "${old[@]}"
+        # Quieres eliminar archivo ?
+        read -p "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
+
+        if [[ "$yn" =~ ^[Yy]$ ]]; then
+            # SI quiere
+            echo "${old[@]}" | xargs -I {file} bash -c 'rm "{file}"'
+        fi
     fi
 else
-    echo "${old[@]}"
+    if (( "${#old}" > 0)); then
+        printf "\n- Archivos antiguos:"
+        echo "${old[@]}"
+        # Quieres eliminar archivo ?
+        read -p "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
+
+        if [[ "$yn" =~ ^[Yy]$ ]]; then
+            # SI quiere
+            echo "${old[@]}" | xargs -I {file} bash -c 'rm "{file}"'
+        fi
+    else
+        printf "\nNo se encontraron resultados...\n\n"
+    fi
 fi
+
+
+
+
+
+
+
