@@ -51,7 +51,7 @@ do
             break
             ;;
     esac
-    # PS3="> "
+    PS3="> "
 done
 
 n_files=$(echo "${old[@]}" | wc -l)
@@ -61,7 +61,7 @@ if (( "$n_files" > 10)); then
     read -p "Se encontraron más de 10 resultados, desea imprimirlos? [y/[n]]: " yn
 
     if [[ "$yn" =~ ^[Yy]$ ]]; then
-        printf "\n- Archivos antiguos:"
+        printf "\n- Archivos antiguos:\n"
         echo "${old[@]}"
         # Quieres eliminar archivo ?
         read -p "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
@@ -73,7 +73,7 @@ if (( "$n_files" > 10)); then
     fi
 else
     if (( "${#old}" > 0)); then
-        printf "\n- Archivos antiguos:"
+        printf "\n- Archivos antiguos:\n"
         echo "${old[@]}"
         # Quieres eliminar archivo ?
         read -p "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
@@ -86,10 +86,3 @@ else
         printf "\nNo se encontraron resultados...\n\n"
     fi
 fi
-
-
-
-
-
-
-

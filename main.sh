@@ -39,29 +39,29 @@ PS3="> "
 while : ; do
     draw_banner
 
-    options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Buscar procesos" "Monitoreo" "Benchmark" "Salir")
+    options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Monitoreo" "Benchmark" "Salir")
     select opt in "${options[@]}"
     do
         case $REPLY in
             1) # archivos viejos
-                /bin/bash find_old.sh; break
+                /bin/bash find_old.sh; 
+                break
                 ;;
             2)
                 break
                 ;;
             3)
+                /bin/bash info.sh;
                 break
                 ;;
             4)
                 break
                 ;;
             5)
+                /bin/bash benchmark.sh;
                 break
                 ;;
             6)
-                break
-                ;;
-            7)
                 break 2
                 ;;
             *) echo "Opcion inválida" ;;
