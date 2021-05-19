@@ -17,9 +17,9 @@ fi
 echo "$BANNER" $'\n'
 tput sgr0
 
-PS3="> " #La cosa del opc
+PS3="> "
 
-echo "Selecciona una opción:"
+printf "- Selecciona una opción:\n"
 options=("Buscar por nombre" "Buscar por PID")
 select opt in "${options[@]}"
 do
@@ -31,7 +31,7 @@ do
 			    if ! [[ "$name" =~ ^[A-Za-z]+$ ]]; then
 			        printf "Debe ser una cadena de texto\n\n"
 			    else
-			    	echo "OKOKOK"
+			    	pgrep "$name" | xargs -I {pid} bash -c 'ps -p {pid} -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS'
 			        break
 			    fi
 			done
@@ -45,7 +45,7 @@ do
 			    if ! [[ "$pid" =~ ^[0-9]+$ ]]; then
 			        printf "Debe ser un número entero\n\n"
 			    else
-			    	echo "OKOKOK"
+			    	ps -p "$pid" -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS
 			        break
 			    fi
 			done

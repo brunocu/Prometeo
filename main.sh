@@ -39,7 +39,7 @@ PS3="> "
 while : ; do
     draw_banner
 
-    options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Monitoreo" "Benchmark" "Salir")
+    options=("Borrar archivos viejos" "Backups" "Información sobre procesos" "Monitoreo" "Benchmark" "Salir")
     select opt in "${options[@]}"
     do
         case $REPLY in
