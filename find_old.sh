@@ -1,0 +1,66 @@
+#!/bin/bash
+
+BANNER=$(cat <<-END
+_    _ _  _ ___  _ ____ ____    ____ ____ ____ _  _ _ _  _ ____ ____ 
+|    | |\/| |__] | |__| |__/    |__| |__/ |    |__| | |  | |  | [__  
+|___ | |  | |    | |  | |  \    |  | |  \ |___ |  | |  \/  |__| ___]
+END
+)
+
+tput bold
+if (($(tput colors) > 8)); then
+    tput setaf 208
+elif (($(tput colors) == 8)); then
+    tput setaf 1
+fi
+echo "$BANNER" $'\n'
+tput sgr0
+while : ;do
+    read -p "Directorio a escanear [$HOME]: " dir
+    dir=${dir:-$HOME}
+    if [[ -r "$dir" ]]; then
+        break
+    else
+        echo "Directorio inexistente o sin permiso de lectura"
+    fi
+done
+
+echo "Antigüedad:"
+options=("1 año" "6 meses" "Otro")
+select opt in "${options[@]}"
+do
+    case $REPLY in
+        1)
+            old=$(find $dir -mtime +365)
+            break
+            ;;
+        2)
+            old=$(find $dir -mtime +183)
+            break
+            ;;
+        3)
+            while : ; do
+                read -p "Antiguedad (dias): " n
+                if ! [[ "$n" =~ ^[0-9]+$ ]]; then
+                    echo "Debe ser un número entero"
+                else
+                    break
+                fi
+            done
+            old=$(find $dir -mtime +$n)
+            break
+            ;;
+    esac
+    # PS3="> "
+done
+
+if (( "${#old}" > 10)); then
+    tput smso
+    read -p "Se encontraron más de 10 resultados, desea imprimirlos? [y/[n]]" yn
+    tput sgr0
+    if [[ "$yn" =~ ^[Yy]$ ]]; then
+        echo "${old[@]}"
+    fi
+else
+    echo "${old[@]}"
+fi

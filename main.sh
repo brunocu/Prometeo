@@ -6,6 +6,7 @@ width=$(tput cols)
 height=$(tput lines)
 
 draw_banner () {
+    clear
     if ((BASH_VERSINFO[0] < 4)); then
         IFS=$'\n'
         read -rd '' -a banarr < banner.txt
@@ -33,26 +34,37 @@ draw_banner () {
     echo "$version_tag"; tput cud1; tput sgr0
 }
 
-draw_banner
-
 PS3="> "
-options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Buscar procesos" "Monitoreo" "Salir")
-select opt in "${options[@]}"
-do
-    case $REPLY in
-        1)
-            ;;
-        2)
-            ;;
-        3)
-            ;;
-        4)
-            ;;
-        5)
-            ;;
-        6)
-            echo "Adios"; break
-            ;;
-        *) echo "Opcion inválida" ;;
-    esac
+
+while : ; do
+    draw_banner
+
+    options=("Borrar archivos viejos" "Backups" "Información sobre proceso" "Buscar procesos" "Monitoreo" "Salir")
+    select opt in "${options[@]}"
+    do
+        case $REPLY in
+            1) # archivos viejos
+                /bin/bash find_old.sh; break
+                ;;
+            2)
+                break
+                ;;
+            3)
+                break
+                ;;
+            4)
+                break
+                ;;
+            5)
+                break
+                ;;
+            6)
+                break 2
+                ;;
+            *) echo "Opcion inválida" ;;
+        esac
+    done
+    tput setaf 3
+    read -n1 -s -r -p $'Presiona cualquier tecla para regresar al menú principal...' dummy
+    tput sgr0
 done
