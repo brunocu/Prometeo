@@ -1,27 +1,37 @@
 #!/bin/bash
-VERSION="0.1"
+VERSION="0.6"
 
-clear
-width=$(tput cols)
-height=$(tput lines)
+function get_multiline () {
+    if ((BASH_VERSINFO[0] < 4)); then
+        IFS=$'\n'
+        read -rd '' -a strarr < $1
+    else
+        readarray -t strarr < $1
+    fi
+
+    len=${#strarr[0]}
+}
+
 
 draw_banner () {
     clear
-    if ((BASH_VERSINFO[0] < 4)); then
-        IFS=$'\n'
-        read -rd '' -a banarr < banner.txt
-    else
-        readarray -t banarr < banner.txt
+    width=$(tput cols)
+    height=$(tput lines)
+
+    get_multiline banner.txt
+
+    if (( len > width )); then # small mode
+        get_multiline small_banner.txt
     fi
 
-    len=${#banarr[0]}
 
     if (( $(tput colors) > 8 )); then
         tput setaf 12
     fi
-    for idx in "${!banarr[@]}"; do
-        tput cup $idx $(((width/2) - (len/2)))
-        echo "${banarr[$idx]}"
+
+    for idx in "${!strarr[@]}"; do
+        tput cup "$idx" $(((width/2) - (len/2)))
+        echo "${strarr[$idx]}"
     done
 
     # Get cursor position
@@ -43,11 +53,12 @@ while : ; do
     select opt in "${options[@]}"
     do
         case $REPLY in
-            1) # archivos viejos
+            1)
                 /bin/bash find_old.sh; 
                 break
                 ;;
             2)
+                /bin/bash backup.sh
                 break
                 ;;
             3)
@@ -55,6 +66,7 @@ while : ; do
                 break
                 ;;
             4)
+                echo "Orita no joven"
                 break
                 ;;
             5)
