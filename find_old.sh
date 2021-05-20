@@ -68,7 +68,7 @@ if (( "$n_files" > 10)); then
 
         if [[ "$yn" =~ ^[Yy]$ ]]; then
             # SI quiere
-            echo "${old[@]}" | xargs -I {file} bash -c 'rm "{file}"'
+            echo "${old[@]}" | xargs -I {file} bash -c 'rm -vrf "{file}"'
         fi
     fi
 else
@@ -80,7 +80,7 @@ else
 
         if [[ "$yn" =~ ^[Yy]$ ]]; then
             # SI quiere
-            echo "${old[@]}" | xargs -I {file} bash -c 'rm "{file}"'
+            echo "${old[@]}" | xargs -I {file} bash -c 'rm -vrf "{file}"'
         fi
     else
         printf "\nNo se encontraron resultados...\n\n"
