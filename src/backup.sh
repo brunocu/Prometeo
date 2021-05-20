@@ -67,8 +67,6 @@ fi
 echo "$BANNER" $'\n'
 tput sgr0
 
-if ! [[ -d "$HOME/.prometeo" ]]; then mkdir "$HOME/.prometeo"; fi
-
 CONFIG_FILE="$HOME/.prometeo/backup.config"
 if ! [[ -e "$CONFIG_FILE" ]]; then
     echo "Primera vez eh? (｡- ω -)... Creando configuración"

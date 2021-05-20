@@ -45,7 +45,7 @@ draw_banner () {
 }
 
 PS3="> "
-
+if ! [[ -d "$HOME/.prometeo" ]]; then mkdir "$HOME/.prometeo"; fi
 while : ; do
     draw_banner
 
@@ -66,7 +66,7 @@ while : ; do
                 break
                 ;;
             4)
-                echo "Orita no joven"
+                /bin/bash monitor.sh
                 break
                 ;;
             5)
