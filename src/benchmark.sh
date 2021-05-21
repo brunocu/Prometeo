@@ -28,4 +28,4 @@ while : ; do
 done
 
 printf "\n- Iniciando benchmark de disco... \n\n"
-ioping -c "$n" .
+ioping -c "$n" . # Comenzar prueba I/O latency con "n" número de pings
