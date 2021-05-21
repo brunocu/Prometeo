@@ -31,7 +31,7 @@ do
 			    if ! [[ "$name" =~ ^[A-Za-z]+$ ]]; then
 			        printf "Debe ser una cadena de texto\n\n"
 			    else
-			    	pgrep "$name" | xargs -I {pid} bash -c 'ps -p {pid} -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS'
+			    	pgrep "$name" | xargs -I {pid} bash -c 'ps -p {pid} -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS' # Entregar información sobre todos los procesos que contengan el nombre especificado
 			        break
 			    fi
 			done
@@ -45,7 +45,7 @@ do
 			    if ! [[ "$pid" =~ ^[0-9]+$ ]]; then
 			        printf "Debe ser un número entero\n\n"
 			    else
-			    	ps -p "$pid" -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS
+			    	ps -p "$pid" -o pid,vsz=MEMORY -o user,group=GROUP -o comm,args=ARGS # Obtener información sobre el proceso con PID especificado
 			        break
 			    fi
 			done
