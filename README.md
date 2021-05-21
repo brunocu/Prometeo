@@ -25,7 +25,7 @@ Prometeo es un programa que ayuda con el monitoreo del sistema operativo, está 
 - Rafael Patino  0226064
 
 # Notas:
-Para el correcto funcionamiento de este programa se requiere instalar el comando "ioping".
-Debian/Ubuntu: sudo apt-get install ioping
-Fedora: sudo dnf install ioping
-MacOS: brew install ioping
+Para el correcto funcionamiento de este programa se requiere instalar el comando "ioping" <br>
+Debian/Ubuntu: sudo apt-get install ioping <br>
+Fedora: sudo dnf install ioping <br>
+MacOS: brew install ioping <br>
