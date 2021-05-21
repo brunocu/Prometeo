@@ -16,7 +16,7 @@ fi
 echo "$BANNER" $'\n'
 tput sgr0
 while : ;do
-    read -p "Directorio a escanear [$HOME]: " dir
+    read -ep "Directorio a escanear [$HOME]: " dir
     dir=${dir:-$HOME}
     if [[ -r "$dir" ]]; then
         break
@@ -40,7 +40,7 @@ do
             ;;
         3)
             while : ; do
-                read -p "Antiguedad (dias): " n
+                read -ep "Antiguedad (dias): " n
                 if ! [[ "$n" =~ ^[0-9]+$ ]]; then
                     echo "Debe ser un número entero"
                 else
@@ -58,13 +58,13 @@ n_files=$(echo "${old[@]}" | wc -l)
 
 if (( "$n_files" > 10)); then
     tput smso
-    read -p "Se encontraron más de 10 resultados, desea imprimirlos? [y/[n]]: " yn
+    read -ep "Se encontraron más de 10 resultados, desea imprimirlos? [y/[n]]: " yn
 
     if [[ "$yn" =~ ^[Yy]$ ]]; then
         printf "\n- Archivos antiguos:\n"
         echo "${old[@]}"
         # Quieres eliminar archivo ?
-        read -p "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
+        read -ep "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
 
         if [[ "$yn" =~ ^[Yy]$ ]]; then
             # SI quiere
@@ -76,7 +76,7 @@ else
         printf "\n- Archivos antiguos:\n"
         echo "${old[@]}"
         # Quieres eliminar archivo ?
-        read -p "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
+        read -ep "Deseas eliminar [$n_files] archivos antiguos? [y/[n]]: " yn
 
         if [[ "$yn" =~ ^[Yy]$ ]]; then
             # SI quiere

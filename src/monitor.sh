@@ -15,15 +15,15 @@ echo "$BANNER" $'\n'
 tput sgr0
 #Se comprueba si el proceso de monitoreo ya está funcionando,
 #El PID del monitoreo se almacena en el archivo /subpid.
-if [[ -e $HOME/.prometeo/subpid ]] && [[ -s $HOME/.prometeo/subpid ]];then
+if [[ -s $HOME/.prometeo/subpid ]];then
   #Se pregunta si se desea terminar el monitoreo.
-  read -p "Deseas terminar el monitoreo? [y/[n]]: " yn
+  read -ep "Deseas terminar el monitoreo? [y/[n]]: " yn
   if [[ "$yn" =~ ^[Yy]$ ]]; then
       # Sí quiere
       fin=$(cat $HOME/.prometeo/subpid)
       #AL finalizar el proceso se elimina el archivo correspondiente al PID.
       rm $HOME/.prometeo/subpid
-      #Se elimina el proceso de monitoreo.
+      #Se elimina el proceso de monitoreo con señal SIGTERM.
       kill -15 "$fin"
       #Se muestra el archivo log que almacena los archivos modificados.
       file=$(cat $HOME/.prometeo/Monitoreo.log)
@@ -32,7 +32,7 @@ if [[ -e $HOME/.prometeo/subpid ]] && [[ -s $HOME/.prometeo/subpid ]];then
 else
   while : ;do
       #Inserción de directorio a monitorear
-      read -p "Directorio que será monitoreado [$HOME]: " dir
+      read -ep "Directorio que será monitoreado [$HOME]: " dir
       dir=${dir:-$HOME}
       if [[ -r "$dir" ]]; then
           break

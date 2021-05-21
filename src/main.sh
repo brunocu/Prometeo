@@ -16,7 +16,6 @@ function get_multiline () {
 draw_banner () {
     clear
     width=$(tput cols)
-    height=$(tput lines)
 
     get_multiline banner.txt
 

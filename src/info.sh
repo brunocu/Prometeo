@@ -19,7 +19,7 @@ tput sgr0
 
 PS3="> "
 
-printf "- Selecciona una opción:\n"
+printf "Selecciona una opción:\n"
 options=("Buscar por nombre" "Buscar por PID")
 select opt in "${options[@]}"
 do
@@ -27,7 +27,7 @@ do
         1)
             # Seleccionar nombre del proceso
 			while : ; do
-			    read -p "Especifíca el nombre : " name
+			    read -ep "Especifíca el nombre : " name
 			    if ! [[ "$name" =~ ^[A-Za-z]+$ ]]; then
 			        printf "Debe ser una cadena de texto\n\n"
 			    else
@@ -41,7 +41,7 @@ do
         2)
             # Seleccionar PID
 			while : ; do
-			    read -p "Especifíca el PID : " pid
+			    read -ep "Especifíca el PID : " pid
 			    if ! [[ "$pid" =~ ^[0-9]+$ ]]; then
 			        printf "Debe ser un número entero\n\n"
 			    else

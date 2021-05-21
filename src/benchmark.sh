@@ -19,7 +19,7 @@ tput sgr0
 
 # Escoger n de pings
 while : ; do
-    read -p "Especifíca el número de pings : " n
+    read -ep "Especifíca el número de pings : " n
     if ! [[ "$n" =~ ^[0-9]+$ ]]; then
         echo "Debe ser un número entero"
     else

@@ -8,11 +8,11 @@ END
 )
 
 function update_dir () {
-    read -p "Nuevo directorio de backups [$dir]: " newdir
+    read -ep "Nuevo directorio de backups [$dir]: " newdir
     newdir=${newdir:-$dir}
     if ! [[ -d $newdir ]]; then
         tput bold; echo -n "$newdir "; tput sgr0
-        read -p "no existe. Desea crearlo [[y]/n]? " yn
+        read -ep "no existe. Desea crearlo [[y]/n]? " yn
         if ! [[ "$yn" =~ ^[Nn]$ ]]; then
             echo "Creando directorio"
             mkdir -p $newdir
@@ -27,12 +27,12 @@ function update_dir () {
 }
 
 function backup_now () {
-    read -p "Directory or file to backup: " target_dir
+    read -ep "Directory or file to backup: " target_dir
     if [[ -e $target_dir ]]; then
         fullpath=$(realpath $target_dir)
 
         echo "Backup: $fullpath"
-        read -p "Confirmar [[y]/n]? " yn
+        read -ep "Confirmar [[y]/n]? " yn
         if [[ "$yn" =~ ^[Nn]$ ]]; then
             echo "Cancelando"
             return 1
@@ -71,7 +71,7 @@ CONFIG_FILE="$HOME/.prometeo/backup.config"
 if ! [[ -e "$CONFIG_FILE" ]]; then
     echo "Primera vez eh? (｡- ω -)... Creando configuración"
     touch "$CONFIG_FILE"
-    read -p "Directorio de backups [$HOME/Backups]: " dir
+    read -ep "Directorio de backups [$HOME/Backups]: " dir
     dir=${dir:-$HOME/Backups}
     if ! [[ -d $dir ]]; then
         echo "Creando $dir"

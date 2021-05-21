@@ -9,6 +9,10 @@
 
 Prometeo es un programa que ayuda con el monitoreo del sistema operativo, está pensado para facilitar tareas que pueden volverse repetitivas y juntar distintos scripts que normalmente tendría que usar un Sysadmin en su trabajo diario. 
 
+<https://github.com/brunocu/Prometeo>
+
+---
+
 # Funcionalidades:
 - Detección de archivos antiguos
 - Eliminación de archivos antiguos
@@ -18,6 +22,7 @@ Prometeo es un programa que ayuda con el monitoreo del sistema operativo, está 
 - Prueba del disco
 - Chistes
 
+---
 
 # Integrantes:
 - Ramón Ruiz     0223276
