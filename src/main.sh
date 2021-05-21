@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="0.6"
+VERSION="1.0"
 
 function get_multiline () {
     if ((BASH_VERSINFO[0] < 4)); then
